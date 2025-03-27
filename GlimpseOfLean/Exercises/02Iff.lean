@@ -35,7 +35,9 @@ prove one-by-one.
 -/
 
 example (a b : ℝ) (ha : 0 < a) (hb : 0 < b) : 0 < a^2 + b^2 := by {
-  sorry
+  apply add_pos
+  exact sq_pos_of_pos ha
+  exact sq_pos_of_pos hb
 }
 
 /-
@@ -60,7 +62,13 @@ example (a : ℝ) (ha : 0 < a) : 0 < (a^2)^2 := by {
 /- Now prove the same lemma as before using forwards reasoning. -/
 
 example (a b : ℝ) (ha : 0 < a) (hb : 0 < b) : 0 < a^2 + b^2 := by {
-  sorry
+  have ha2 : 0 < a^2 := by
+    apply sq_pos_of_pos
+    exact ha
+  have hb2 : 1 < b^2 := by
+    apply sq_pos_of_pos
+    exact hb
+  apply add_pos
 }
 
 
